@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace Oxide.Plugins
 {
-    [Info("TRRMoreCommands", "Mixxe73", "1.2.1")]
+    [Info("TRRMoreCommands", "Mixxe73", "1.3.2")]
     class TRRMoreCommands : RustLegacyPlugin
     {
         static JsonSerializerSettings jsonsettings;
@@ -40,6 +40,29 @@ namespace Oxide.Plugins
         string AdminName = "Администраторы";
         string[] admins = { "Mixxe73", "Freezak"};
         #endregion
+
+
+        void OnServerInitialized()
+		{
+            CheckCfg<string>("[ALL]Настройки: Отображаемый префикс сервера", ref chatName);
+
+			CheckCfg<bool>("[VK]Настройки: ВКЛ/ВЫКЛ команду", ref CommandReport);
+            CheckCfg<string>("[VK]Настройки: Отображаемый префикс репортов", ref ReportName);
+            CheckCfg<string>("[VK]Настройки: Токен аккаунта", ref ProfileToken);
+            CheckCfg<int>("[VK]Настройки: Ид беседы для репортов", ref ReportConversationId);
+
+            CheckCfg<bool>("[ADMINS]Настройки: ВКЛ/ВЫКЛ команду", ref CommandAdminsView);
+            CheckCfg<string>("[ADMINS]Настройки: Отображаемый префикс репортов", ref AdminName);
+			SaveConfig();
+			
+		}
+		protected override void LoadDefaultConfig(){} 
+		private void CheckCfg<T>(string Key, ref T var){
+			if(Config[Key] is T)
+			var = (T)Config[Key];  
+			else
+			Config[Key] = var;
+		}
 
         #region Message
         /* Список всех сообщений */
