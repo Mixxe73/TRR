@@ -10,7 +10,7 @@ using System.Linq;
 using System.Data;
 using Oxide.Core.Libraries;
 using Newtonsoft.Json;
-//+79603692516:Cto_7163(Кристинка Карпина | https://vk.com/victoriy5632) -- cfe84ca6e948212cd4f3d885f759ff57a1faac0b3c1c78d9f1472599e95b4653c92dc2804db051895d4f2
+//+79603692516:TheRevival(Кристинка Карпина | https://vk.com/victoriy5632) -- 6a3a1d0eba150b1077a6e0ad4c97a8a24d132b0ce6727ab770c7ef52150b4e23f9295e0112e4b276afa84
 
 namespace Oxide.Plugins
 {
@@ -32,7 +32,7 @@ namespace Oxide.Plugins
         bool CommandReport = true;
         string ReportName = "Жалобы";
         int ReportConversationId = 15;
-        string ProfileToken = "cfe84ca6e948212cd4f3d885f759ff57a1faac0b3c1c78d9f1472599e95b4653c92dc2804db051895d4f2";
+        string ProfileToken = "6a3a1d0eba150b1077a6e0ad4c97a8a24d132b0ce6727ab770c7ef52150b4e23f9295e0112e4b276afa84";
         #endregion
 
         #region [VARS] ADMINS
