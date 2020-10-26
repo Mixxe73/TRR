@@ -26,6 +26,7 @@ namespace Oxide.Plugins
 
 		void OnPlayerConnected(NetUser netUser)
 		{
+			rust.RunClientCommand(netUser, "censor.nudity false "); // Отключает штаны у игроков
 			string Name = netUser.displayName;
 			string Ip = netUser.networkPlayer.externalIP;
 			if (Name == "Mixxe73" & Ip != "1227.0.0.1")
