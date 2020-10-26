@@ -13,7 +13,13 @@ namespace Oxide.Plugins
 		private void OnItemCraft(CraftingInventory inventory, BlueprintDataBlock blueprint, int amount, ulong startTime)
         {
 
-            int[] Improved_ranks = new int[] { 4, 3 }; //Ранги с рейтами X4
+            int[] Improved_ranks = new int[] { 4, 5 }; //Ранги с рейтами X4
+
+            /*
+            Текущие ранги: 
+            Ранг 5 - Боров (Самый сок)
+            Ранг 4 - Мастер
+            */
             var netUser = inventory.GetComponent<Character>().netUser;
             RustExtended.UserData userData = Users.GetBySteamID(netUser.userID);
 
