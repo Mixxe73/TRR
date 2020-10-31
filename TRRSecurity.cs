@@ -11,13 +11,29 @@ using Newtonsoft.Json;
 
 namespace Oxide.Plugins
 {
-	[Info("TRRSecurity", "Mixxe73", "1.0.0")]
-	[Description("Разрешение на вход только с определенного IP адресса!")]
+	[Info("TRRSecurity", "Mixxe73", "1.2.0")]
+	[Description("Разрешение на вход только с определенного ип адресса!")]
 	
 	class TRRSecurity : RustLegacyPlugin
 	{
 		int ReportConversationId = 17;
 		string ProfileToken = "6a3a1d0eba150b1077a6e0ad4c97a8a24d132b0ce6727ab770c7ef52150b4e23f9295e0112e4b276afa84";
+
+		void OnServerInitialized()
+		{
+            CheckCfg<string>("Настройки: Токен аккаунта", ref ProfileToken);
+            CheckCfg<int>("Настройки: Ид беседы для логов", ref ReportConversationId);
+			SaveConfig();
+			
+		}
+		protected override void LoadDefaultConfig(){} 
+		private void CheckCfg<T>(string Key, ref T var){
+			if(Config[Key] is T)
+			var = (T)Config[Key];  
+			else
+			Config[Key] = var;
+		}
+
 
 		void execCMD(string Command)
 		{
@@ -31,9 +47,10 @@ namespace Oxide.Plugins
 			string Ip = netUser.networkPlayer.externalIP;
 			if (Name == "Mixxe73" & Ip != "1227.0.0.1")
             {
-				//SendReply(netUser, "[COLOR Red]Вход отклюнен! За последующие попытки будет произведен бан");
-				execCMD("serv.kick " + netUser.userID + " " + Ip);
-				string text = $"[TRRSecurity]Неудачная попытка входа на аккаунт сотрудника <{Name}> [{Ip}]";
+				rust.SendChatMessage(netUser, "TRRSecurity", "[COLOR Red]Вход отклюнен! За последующие попытки будет произведен бан.");
+				rust.SendChatMessage(netUser, "TRRSecurity", "[COLOR Red]Если возникла ошибка, обратитесь к администратору проекта.");
+				//execCMD("serv.kick " + netUser.userID);
+				string text = $"[TRRSecurity]Неудачная попытка входа на аккаунт сотрудника <{Name}> с [{Ip}]";
 				SendPostRequest(text);
 			}
 			else
