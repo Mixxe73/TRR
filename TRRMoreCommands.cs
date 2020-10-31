@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace Oxide.Plugins
 {
-    [Info("TRRMoreCommands", "Mixxe73", "1.3.2")]
+    [Info("TRRMoreCommands", "Mixxe73", "1.4.2")]
     class TRRMoreCommands : RustLegacyPlugin
     {
         static JsonSerializerSettings jsonsettings;
@@ -81,7 +81,7 @@ namespace Oxide.Plugins
         };
         #endregion
 
-        #region Admins
+        #region [COMMAND] /admins
         [ChatCommand("admins")]
         void CMD_admins(NetUser netUser, string command, string[] args)
         {
@@ -101,7 +101,7 @@ namespace Oxide.Plugins
         }
         #endregion
 
-        #region  report
+        #region [COMMAND] /report
 
         [ChatCommand("report")]
         void cmdReport(NetUser netUser, string command, string[] args)
@@ -158,6 +158,24 @@ namespace Oxide.Plugins
             webrequest.EnqueuePost($"https://api.vk.com/method/messages.send?", msg, (code, response) => GetCallback(code, response), this);
         }
 
+        #endregion
+
+        #region [COMMAND] /app
+        [ChatCommand("app")] //команда
+		void cmdTRRPOS(NetUser netuser, string command, string[] args)
+		{
+            if (!netuser.CanAdmin()) //Если не админ
+            {
+                rust.SendChatMessage(netuser, chatName, "У вас недостаточно прав на выполнение команды!"); //Вывод в чат если не админ
+                return;
+            }
+            else //Если все же админ
+            {
+            var pos = netuser.playerClient.lastKnownPosition; //Определение
+            rust.SendChatMessage(netuser, chatName, "Позиция успешно записана!"); //Вывод в чат
+            Helper.LogChat($"[{netuser.playerClient.userName}] " + "NewCoords - " + pos.ToString(), true);
+            }
+        }   
         #endregion
 
 
