@@ -26,7 +26,8 @@ namespace Oxide.Plugins
             if (netuser.CanAdmin())
             {
             rust.SendChatMessage(netuser, chatName, "[COLOR#3CB371]Команды администратора:");
-            rust.SendChatMessage(netuser, chatName, "[COLOR#3CB371]*/[COLOR#FFFFFF]pp ➭ Передать координаты в консоль!");
+            rust.SendChatMessage(netuser, chatName, "[COLOR#3CB371]*/[COLOR#FFFFFF]app ➭ Передать координаты в консоль!");
+            rust.SendChatMessage(netuser, chatName, "[COLOR#3CB371]*/[COLOR#FFFFFF]bl ➭ Заблокировать игрока с отправкой на форум!");
             }
             rust.SendChatMessage(netuser, chatName, "[COLOR#3CB371]ABOUT INFO![COLOR#FFFFFF] Данный сервер использует лицензионный игровой мод TRR!");
     }   
