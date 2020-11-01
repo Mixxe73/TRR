@@ -19,6 +19,10 @@ namespace Oxide.Plugins
             Ранг 4 - Мастер
             */
 
+        public List<string> activated;
+        void OnServerSave() => Interface.GetMod().DataFileSystem.WriteObject("X4MulticaptionUserDB", activated);
+        void Loaded() => activated = Interface.GetMod().DataFileSystem.ReadObject<List<string>>("X4MulticaptionUserDB");
+
 		private void OnItemCraft(CraftingInventory inventory, BlueprintDataBlock blueprint, int amount, ulong startTime)
         {
             var netUser = inventory.GetComponent<Character>().netUser;
@@ -26,7 +30,7 @@ namespace Oxide.Plugins
 
             if (blueprint.resultItem.name == "556 Ammo" || blueprint.resultItem.name == "9mm Ammo" || blueprint.resultItem.name == "Shotgun Shells")
             {
-                if (Array.IndexOf(Improved_ranks, userData.Rank) == 1)
+                if (Array.IndexOf(Improved_ranks, userData.Rank) == 1 || activated.Contains(netUser.displayName))
                 {
                 int NewCount = amount + amount + amount;
                 inventory.AddItemAmount(DatablockDictionary.GetByName(blueprint.resultItem.name), NewCount);
